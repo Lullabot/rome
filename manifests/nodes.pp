@@ -25,3 +25,18 @@ node "memcache" {
   }
 }
 
+node "solr" {
+  Exec {
+    path => "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    logoutput => on_failure,
+  }
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  # Solr, and available indexes
+  class { 'solr': }
+  solr::index::drupal { 'apache.juno.local': version => '7.x-1.1' }
+}
+
