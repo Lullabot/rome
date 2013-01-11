@@ -1,6 +1,10 @@
 node "mysql" {
   include mysql::server
 
+  class { 'apt':
+    always_apt_update => true,
+  }
+
   # Keep track of our customized configuration files.
   #file { '/etc/mysql/my.cnf':
   #    ensure  => present,
