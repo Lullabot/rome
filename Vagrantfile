@@ -1,8 +1,8 @@
 Vagrant::Config.run do |config|
   require "./config.rb"
 
-  Vm.descendands.each_with_index do |vm,count_vms|
-    config.vm.define "#{vm::Shortname}#{index}" do |vm_config|
+  Vm.descendants.each_with_index do |vm,count_vms|
+    config.vm.define "#{vm::Shortname}" do |vm_config|
       vm_config.ssh.max_tries = vm::SSH_tries
       vm_config.ssh.forward_agent = vm::SSH_forward_agent
       vm_config.vm.box = vm::Basebox
@@ -20,9 +20,9 @@ Vagrant::Config.run do |config|
 
       vm_config.vm.network :hostonly, ip
 
-      hostname = "#{vm::Shortname}#{count}.#{Conf::Project}.#{vm::Domain}"
+      hostname = "#{vm::Shortname}.#{Conf::Project}.#{vm::Domain}"
       vm_config.vm.host_name = hostname
-      vm_config.vm.customize ["modifyvm", :id, "--name", "#{vm::Longname}#{formatted_count}(#{hostname})"]
+      vm_config.vm.customize ["modifyvm", :id, "--name", "#{vm::Longname}(#{hostname})"]
       vm_config.vm.customize ["modifyvm", :id, "--memory", "#{vm::Memory}"]
       vm_config.vm.customize ["modifyvm", :id, "--cpus", "#{vm::Cpus}"]
       if (vm::Cpus > 1)
