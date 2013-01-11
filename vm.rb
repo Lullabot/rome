@@ -9,7 +9,7 @@ class Vm
   Memory     = "256"
   Cpus       = 1
   Domain    = "local"                    # default domain
-  Modules   = {}                         # hash of puppet module folder names
+  Modules   = {'rome' => 'modules/'}     # hash of puppet module folder names
   Manifests = "manifests"                # puppet manifests folder name
   Site      = "site"                     # name of manifest to apply
   Gui       = false                      # start VM with GUI?
@@ -26,7 +26,7 @@ class Conf
   Network   = "192.168"                  # Private network address: ###.###.0.0
   Subnet    = "100"                      # Private network address: ###.###.0.0
   Host_IP   = 10                         # Starting host address: 192.168.0.###
-  Modules   = {}                         # hash of puppet module folder names
+  Modules   = {'rome' => 'modules/'}     # hash of puppet module folder names
   Facts     = {}                         # hash of Factor facts
   SSH_range = (32200..32250)
 end
