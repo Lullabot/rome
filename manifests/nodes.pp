@@ -1,4 +1,5 @@
 node "mysql" {
+  include base
   include mysql::server
 
   class { 'apt':
@@ -15,6 +16,7 @@ node "mysql" {
 }
 
 node "memcache" {
+  include base
   class { 'apt':
     always_apt_update => true,
   }
@@ -69,6 +71,7 @@ node "apache" {
 }
 
 node "solr" {
+  include base
   Exec {
     path => "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
     logoutput => on_failure,
