@@ -32,5 +32,6 @@ class Apache < Vm                   # VM-specific overrides of default settings
   Host_IP    = "192.168.100.40"
   Memory     = "1024"
   Cpus       = 4
+  NFS_shares = {"www" => "/mnt/www"}
 end
 

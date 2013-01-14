@@ -34,6 +34,13 @@ Vagrant::Config.run do |config|
       # until the VM is rebooted.
       vm_config.vbguest.auto_update = false
       
+      # Ensure that Vagrant helps us managed /etc/exports.
+      if defined?(vm::NFS_shares) # Deprecated, as NFS is now supported directly in Dir_shares
+        vm::NFS_shares.each do |name, path|
+          vm_config.vm.share_folder(name, path, "./#{name}", { :nfs => true, :create => true, :remount => true })
+        end
+      end
+
       if vm::Gui == true
         vm_config.vm.boot_mode = :gui
       end

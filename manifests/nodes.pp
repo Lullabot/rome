@@ -33,6 +33,15 @@ node "apache" {
   include php
   include mysql::client
 
+## Uncomment and edit this to match the path that you want to share to your VM.
+#  mount { "/var/www":
+#    device => "192.168.100.1:/Users/andrew/vagrant/projects/rome/www",
+#    fstype => "nfs",
+#    ensure => "mounted",
+#    options => "udp",
+#    atboot => "true",
+#  }
+
   class { 'apt':
     always_apt_update => true,
   }
