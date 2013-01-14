@@ -1,5 +1,23 @@
+# Edit this class as needed to add additional hosts to your configuration.
+class hosts {
+  host { 'mysql.juno.local' :
+    ip => '192.168.100.10',
+  }
+
+  host { 'memcache.juno.local' :
+    ip => '192.168.100.20',
+  }
+  host { 'solr.juno.local' :
+    ip => '192.168.100.30',
+  }
+  host { 'apache.juno.local' :
+    ip => '192.168.100.40',
+  }
+}
+
 node "mysql" {
   include base
+  include hosts
   include mysql::server
 
   class { 'apt':
@@ -17,6 +35,7 @@ node "mysql" {
 
 node "memcache" {
   include base
+  include hosts
   class { 'apt':
     always_apt_update => true,
   }
@@ -29,6 +48,7 @@ node "memcache" {
 
 node "apache" {
   include base
+  include hosts
   include apache
   include php
   include mysql::client
@@ -81,6 +101,7 @@ node "apache" {
 
 node "solr" {
   include base
+  include hosts
   Exec {
     path => "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
     logoutput => on_failure,
