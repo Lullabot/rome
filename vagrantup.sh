@@ -6,6 +6,7 @@ vagrant up --no-provision
 LASTEXIT=1
 while [[ $LASTEXIT -ne 0 ]]
 do
+  echo "Starting vagrant provision..."
   vagrant provision
   LASTEXIT=$?
 done
