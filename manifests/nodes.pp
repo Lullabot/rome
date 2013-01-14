@@ -84,6 +84,13 @@ node "apache" {
   }
 
   # Keep track of our customized configuration files.
+  file { '/etc/apache2/sites-available/default':
+      ensure  => present,
+      source  => '/vagrant/files/apache/etc/apache2/sites-available/default',
+      owner   => 'root',
+      group   => 'root',
+  }
+
   file { '/etc/php5/apache2/php.ini':
       ensure  => present,
       source  => '/vagrant/files/apache/etc/php5/apache2/php.ini',
