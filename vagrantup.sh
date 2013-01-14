@@ -11,3 +11,7 @@ do
   LASTEXIT=$?
 done
 
+# Reload all our VMs to ensure they boot cleanly based off of our default
+# configs.
+vagrant reload
+
