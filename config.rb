@@ -1,5 +1,17 @@
 require "./vm.rb"
 
+# Global configuration for the project goes here.
+class Conf
+  Project   = "juno"                     # Rename this to match the name of your project.
+  Network   = "192.168"                  # Private network address: ###.###.0.0
+  Subnet    = "100"                      # Private network address: ###.###.0.0
+  Host_IP   = 10                         # Starting host address: 192.168.0.###
+  Modules   = {'rome' => 'modules/'}     # hash of puppet module folder names
+  Facts     = {}                         # hash of Factor facts
+  SSH_range = (32200..32250)
+end
+
+# VM configuration starts here.
 class MySQL < Vm
   Shortname  = "mysql"             # Vagrant name (used for manifest name, e.g., hm.pp)
   Longname   = "Drupal 7.x MySQL"     # VirtualBox name

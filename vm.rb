@@ -21,13 +21,3 @@ class Vm
   SSH_forward_agent = false              # Whether to forward SSH agent
 end
 
-class Conf
-  Project   = "juno"
-  Network   = "192.168"                  # Private network address: ###.###.0.0
-  Subnet    = "100"                      # Private network address: ###.###.0.0
-  Host_IP   = 10                         # Starting host address: 192.168.0.###
-  Modules   = {'rome' => 'modules/'}     # hash of puppet module folder names
-  Facts     = {}                         # hash of Factor facts
-  SSH_range = (32200..32250)
-end
-

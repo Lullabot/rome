@@ -19,6 +19,10 @@ It is recommended to use Rome as a full git clone with a local branch keeping tr
 
 git clone <url>
 git checkout -b local
+vim config.rb
+vim manifests/nodes.pp
+git commit -m 'A useful commit message.'
+vagrant up
 
 Most VM configuration is handled through config.rb. Within this file, define each VM as a subclass of Vm. Each Shortname property is used to tell Vagrant what Puppet configs to apply to the machine.
 
