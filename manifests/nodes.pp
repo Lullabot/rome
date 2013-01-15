@@ -25,12 +25,12 @@ node "mysql" {
   }
 
   # Keep track of our customized configuration files.
-  #file { '/etc/mysql/my.cnf':
-  #    ensure  => present,
-  #    source  => '/vagrant/files/mysql/etc/mysql/my.cnf',
-  #    owner   => 'root',
-  #    group   => 'root',
-  #}
+  file { '/etc/mysql/conf.d/local.cnf':
+      ensure  => present,
+      source  => '/vagrant/files/mysql/etc/mysql/conf.d/local.cnf',
+      owner   => 'root',
+      group   => 'root',
+  }
 }
 
 node "memcache" {
