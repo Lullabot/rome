@@ -29,8 +29,6 @@ class Memcache < Vm
 end
 
 class Solr < Vm
-  Basebox    = "precise32"
-  Box_url    = "http://files.vagrantup.com/precise32.box"
   Shortname  = "solr"             # Vagrant name (used for manifest name, e.g., hm.pp)
   Longname   = "Drupal 7.x Solr"     # VirtualBox name
   Host_IP    = "192.168.100.30"
