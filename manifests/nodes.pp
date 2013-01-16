@@ -42,7 +42,7 @@ node "memcache" {
 
   class { 'memcached':
     mem => 96,
-    listen => 'INADDR_ANY',
+    listen => '192.168.100.20',
   }
 }
 
