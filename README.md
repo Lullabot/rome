@@ -22,7 +22,7 @@ It is recommended to use Rome as a full git clone with a local branch keeping tr
     vim config.rb
     vim manifests/nodes.pp
     git commit -m 'A useful commit message.'
-    ./vagrantup.sh
+    ./vagrant-init.sh
     vagrant vbguest # If you have https://github.com/dotless-de/vagrant-vbguest installed.
     vim /etc/hosts # Add the IP of the Apache server.
 
@@ -33,7 +33,7 @@ By default, all VMs are configured to use 4 CPUs. If running on a machine with l
 Initial `vagrant up`
 ====================
 
-These VMs use Puppet to manage configuration. Puppet is an "eventually consistent" system, where dependency resolution might take several "vagrant provision" runs to complete configuration. For new VMs, this is especially an issue with installing new packages, as there's no simple way to ensure "apt-get update" runs before installing new packages. Use the included `vagrantup.sh` script to work around this issue.
+These VMs use Puppet to manage configuration. Puppet is an "eventually consistent" system, where dependency resolution might take several "vagrant provision" runs to complete configuration. For new VMs, this is especially an issue with installing new packages, as there's no simple way to ensure "apt-get update" runs before installing new packages. Use the included `vagrant-init.sh` script to work around this issue.
 
 VM IPs
 ======
