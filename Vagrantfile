@@ -34,11 +34,6 @@ Vagrant::Config.run do |config|
         vm_config.vm.customize ["modifyvm", :id, "--ioapic", "on"]
       end
 
-      # If the vbguest plugin is enabled, we disable auto_updates. Otherwise,
-      # initial provisioning can fail as the vboxsf module can't be loaded
-      # until the VM is rebooted.
-      #vm_config.vbguest.auto_update = false
-      
       # Ensure that Vagrant helps us managed /etc/exports.
       if defined?(vm::NFS_shares) # Deprecated, as NFS is now supported directly in Dir_shares
         vm::NFS_shares.each do |name, path|
