@@ -98,7 +98,7 @@ class rome::apache inherits rome {
 class rome::memcache inherits rome {
   class { 'memcached':
     mem => 96,
-    listen => '192.168.100.20',
+    listen => "all",
   }
 }
 
