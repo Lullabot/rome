@@ -38,6 +38,10 @@ class rome {
     always_apt_update => true,
   }
 
+  package {'htop':
+    ensure => present,
+  }
+
   package {'unattended-upgrades':
     ensure => present,
   }
