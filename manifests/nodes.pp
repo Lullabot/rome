@@ -42,6 +42,13 @@ class rome {
     ensure => present,
   }
 
+  file { 'rc.local':
+    path => '/etc/rc.local',
+    source => '/vagrant/files/common/etc/rc.local',
+    owner => 'root',
+    group => 'root',
+  }
+
   file { 'etc apt confs':
     path => '/etc/apt/apt.conf.d',
     source => '/vagrant/files/common/etc/apt/apt.conf.d',
