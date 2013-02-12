@@ -2,6 +2,11 @@ Vagrant::Config.run do |config|
   require "./config.rb"
 
   Vm.descendants.each_with_index do |vm,count_vms|
+    # Skip VMs that are not a part of this configuration.
+    if Conf::Mvm != vm::Mvm
+      next
+    end
+
     config.vm.define "#{vm::Shortname}" do |vm_config|
       vm_config.ssh.max_tries = vm::SSH_tries
       vm_config.ssh.forward_agent = vm::SSH_forward_agent

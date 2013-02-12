@@ -3,6 +3,8 @@ Rome: A Multi-VM Vagrant Environment for LAMP developent
 
 Rome is a set of Vagrant and Puppet configurations used to create and manage a development environment where each service is hosted on a separate machine. This allows developers to accurately test productions scenarios where each environment is separated by a network of some kind.
 
+Rome also defines a single VM ("OneBox") that is identical to the separate VM configuration, but builds a single VM instead. It can be useful for systems with low memory or disk space, while still coming close to modeling a production environment.
+
 The following VM types are available within Rome:
 
 * Apache

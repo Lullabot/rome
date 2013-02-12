@@ -15,40 +15,17 @@ class hosts {
   }
 }
 
-node "mysql" {
-  include base
-  include hosts
-  include mysql::server
-
-  class { 'apt':
-    always_apt_update => true,
-  }
-
-  # Keep track of our customized configuration files.
-  file { '/etc/mysql/conf.d/local.cnf':
-      ensure  => present,
-      source  => '/vagrant/files/mysql/etc/mysql/conf.d/local.cnf',
-      owner   => 'root',
-      group   => 'root',
-  }
-}
-
-node "memcache" {
+# VM configuration that should be included in all VMs.
+class rome {
   include base
   include hosts
   class { 'apt':
     always_apt_update => true,
   }
-
-  class { 'memcached':
-    mem => 96,
-    listen => '192.168.100.20',
-  }
 }
 
-node "apache" {
-  include base
-  include hosts
+class rome::apache inherits rome {
+  include rome
   include apache
   include php
   include mysql::client
@@ -61,10 +38,6 @@ node "apache" {
 #    options => "udp",
 #    atboot => "true",
 #  }
-
-  class { 'apt':
-    always_apt_update => true,
-  }
 
   package { 'openjdk-7-jre-headless':
       ensure  => present,
@@ -106,21 +79,58 @@ node "apache" {
   }
 }
 
-node "solr" {
-  include base
-  include hosts
+# Include this to add memcache to your VM.
+class rome::memcache inherits rome {
+  class { 'memcached':
+    mem => 96,
+    listen => '192.168.100.20',
+  }
+}
+
+class rome::mysql inherits rome {
+  include mysql::server
+
+  # Keep track of our customized configuration files.
+  file { '/etc/mysql/conf.d/local.cnf':
+      ensure  => present,
+      source  => '/vagrant/files/mysql/etc/mysql/conf.d/local.cnf',
+      owner   => 'root',
+      group   => 'root',
+  }
+}
+
+class rome::solr inherits rome {
   Exec {
     path => "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
     logoutput => on_failure,
   }
 
-  class { 'apt':
-    always_apt_update => true,
-  }
-
   # Solr, and available indexes
-  class { 'solr': }
+  class { '::solr': }
   solr::index::drupal { 'apache.juno.local': version => '7.x-1.1' }
+}
+
+node "onebox" {
+  include rome::apache
+  include rome::memcache
+  include rome::mysql
+  include rome::solr
+}
+
+node "apache" {
+  include rome::apache
+}
+
+node "memcache" {
+  include rome::memcache
+}
+
+node "mysql" {
+  include rome::mysql
+}
+
+node "solr" {
+  include rome::solr
 }
 
 define download ($uri, $timeout = 300) {
