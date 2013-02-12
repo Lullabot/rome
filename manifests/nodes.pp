@@ -55,6 +55,7 @@ class rome::apache inherits rome {
   include rome
   include apache
   include php
+  include pear
   include mysql::client
 
 ## Uncomment and edit this to match the path that you want to share to your VM.
@@ -65,6 +66,10 @@ class rome::apache inherits rome {
 #    options => "udp",
 #    atboot => "true",
 #  }
+
+  pear::package { "drush":
+    repository => "pear.drush.org",
+  }
 
   package { 'openjdk-7-jre-headless':
       ensure  => present,
