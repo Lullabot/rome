@@ -1,5 +1,5 @@
 # Edit this class as needed to add additional hosts to your configuration.
-class hosts {
+class rome::mvmhosts {
   host { 'mysql.juno.local' :
     ip => '192.168.100.10',
   }
@@ -15,10 +15,25 @@ class hosts {
   }
 }
 
+class rome::onehost {
+  host { 'mysql.juno.local' :
+    ip => '127.0.0.1',
+  }
+
+  host { 'memcache.juno.local' :
+    ip => '127.0.0.1',
+  }
+  host { 'solr.juno.local' :
+    ip => '127.0.0.1',
+  }
+  host { 'apache.juno.local' :
+    ip => '127.0.0.1',
+  }
+}
+
 # VM configuration that should be included in all VMs.
 class rome {
   include base
-  include hosts
   class { 'apt':
     always_apt_update => true,
   }
@@ -111,6 +126,7 @@ class rome::solr inherits rome {
 }
 
 node "onebox" {
+  include rome::onehost
   include rome::apache
   include rome::memcache
   include rome::mysql
@@ -118,18 +134,22 @@ node "onebox" {
 }
 
 node "apache" {
+  include rome::mvmhosts
   include rome::apache
 }
 
 node "memcache" {
+  include rome::mvmhosts
   include rome::memcache
 }
 
 node "mysql" {
+  include rome::mvmhosts
   include rome::mysql
 }
 
 node "solr" {
+  include rome::mvmhosts
   include rome::solr
 }
 
