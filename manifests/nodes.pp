@@ -37,6 +37,18 @@ class rome {
   class { 'apt':
     always_apt_update => true,
   }
+
+  package {'unattended-upgrades':
+    ensure => present,
+  }
+
+  file { 'etc apt confs':
+    path => '/etc/apt/apt.conf.d',
+    source => '/vagrant/files/common/etc/apt/apt.conf.d',
+    recurse => true,
+    owner => 'root',
+    group => 'root',
+  }
 }
 
 class rome::apache inherits rome {
