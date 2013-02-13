@@ -12,6 +12,5 @@
 # By default this script does nothing.
 
 # Run unattended-upgrades when we boot our VM.
-unattended-upgrade
+sleep 60 && unattended-upgrade
 
-exit 0
