@@ -46,6 +46,10 @@ class rome {
     ensure => present,
   }
 
+  package {'vim':
+    ensure => present,
+  }
+
   file { 'rc.local':
     path => '/etc/rc.local',
     source => '/vagrant/files/common/etc/rc.local',
