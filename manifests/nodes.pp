@@ -68,7 +68,6 @@ class rome {
 
 class rome::apache inherits rome {
   include rome
-  include apache
   include php
   include pear
   include mysql::client
@@ -81,6 +80,11 @@ class rome::apache inherits rome {
 #    options => "udp",
 #    atboot => "true",
 #  }
+
+  class {'::apache':
+    mod_php5 => true,
+    mod_headers => true,
+  }
 
   pear::package { "PEAR": }
   pear::package { "Console_Table": }
