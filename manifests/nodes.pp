@@ -68,10 +68,6 @@ class rome {
 
 class rome::apache inherits rome {
   include rome
-  include php
-  include pear
-  include mysql::client
-
 ## Uncomment and edit this to match the path that you want to share to your VM.
 #  mount { "/var/www":
 #    device => "192.168.100.1:/Users/andrew/vagrant/projects/rome/www",
@@ -80,6 +76,10 @@ class rome::apache inherits rome {
 #    options => "udp",
 #    atboot => "true",
 #  }
+
+  class {'::php':}
+  class {'::pear':}
+  class {'::mysql::client':}
 
   class {'::apache':
     mod_php5 => true,
