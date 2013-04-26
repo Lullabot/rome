@@ -82,8 +82,12 @@ class rome::apache inherits rome {
 #    atboot => "true",
 #  }
 
+  pear::package { "PEAR": }
+  pear::package { "Console_Table": }
+
   pear::package { "drush":
     repository => "pear.drush.org",
+    version => 'latest',
   }
 
   package { 'php5-xdebug':
