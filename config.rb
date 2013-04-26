@@ -2,7 +2,7 @@ require "./vm.rb"
 
 # Global configuration for the project goes here.
 class Conf
-  Project   = "juno"                     # Rename this to match the name of your project.
+  Project   = "rome"                     # Rename this to match the name of your project.
   Mvm       = true                       # Set to false to build a single über VM instead.
   Network   = "192.168"                  # Private network address: ###.###.0.0
   Subnet    = "100"                      # Private network address: ###.###.0.0
