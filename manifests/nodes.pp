@@ -86,6 +86,10 @@ class rome::apache inherits rome {
     repository => "pear.drush.org",
   }
 
+  package { 'php5-xdebug':
+      ensure => present,
+  }
+
   package { 'openjdk-7-jre-headless':
       ensure  => present,
   }
