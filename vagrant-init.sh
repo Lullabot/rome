@@ -7,13 +7,18 @@ do
   echo "Starting vagrant provision..."
   echo "Waiting 3 seconds before provisioning..."
   sleep 3
+  sudo -v
   vagrant up --no-provision
+  sudo -v
   vagrant reload
+  sudo -v
   vagrant provision
+  sudo -v
   LASTEXIT=$?
 done
 
 # Reload all our VMs to ensure they boot cleanly based off of our default
 # configs.
+sudo -v
 vagrant reload
 
