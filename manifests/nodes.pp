@@ -1,3 +1,7 @@
+stage { 'first':
+    before => Stage['main'],
+}
+
 # Edit this class as needed to add additional hosts to your configuration.
 class rome::mvmhosts {
   host { 'mysql.juno.local' :
@@ -31,11 +35,42 @@ class rome::onehost {
   }
 }
 
+class apt-proxy {
+  if $apt_proxy {
+    file { "/etc/apt/apt.conf.d/71proxy":
+      owner   => root,
+      group   => root,
+      mode    => '0644',
+      content => "Acquire::http { Proxy \"${apt_proxy}\"; };",
+    }
+  }
+  else {
+    file { "/etc/apt/apt.conf.d/71proxy":
+      ensure  => absent,
+    }
+  }
+
+  file { 'etc apt confs':
+    path => '/etc/apt/apt.conf.d',
+    source => '/vagrant/files/common/etc/apt/apt.conf.d',
+    recurse => true,
+    owner => 'root',
+    group => 'root',
+  }
+}
+
 # VM configuration that should be included in all VMs.
 class rome {
   include base
+
+  class { 'apt-proxy':
+    stage => first,
+  }
+
   class { 'apt':
     always_apt_update => true,
+    require => File[ "/etc/apt/apt.conf.d/71proxy" ],
+    stage   => 'first',
   }
 
   package {'htop':
