@@ -17,7 +17,7 @@ class Vm
   Debug     = false                      # output debug info?
   Options   = ""                         # options to pass to Puppet
   Facts     = {}                         # hash of Factor facts
-  SSH_tries = 5                          # How quickly to fail should Vagrant hang
+  SSH_tries = 100                        # How quickly to fail should Vagrant hang
   SSH_forward_agent = false              # Whether to forward SSH agent
 end
 
