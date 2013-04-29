@@ -103,14 +103,16 @@ class rome {
 
 class rome::apache inherits rome {
   include rome
-## Uncomment and edit this to match the path that you want to share to your VM.
-#  mount { "/var/www":
-#    device => "192.168.100.1:/Users/andrew/vagrant/projects/rome/www",
-#    fstype => "nfs",
-#    ensure => "mounted",
-#    options => "udp",
-#    atboot => "true",
-#  }
+
+  if $nfs_www {
+    mount { "/var/www":
+      device => $nfs_www,
+      fstype => "nfs",
+      ensure => "mounted",
+      options => "udp",
+      atboot => "false",
+    }
+  }
 
   class {'::php':}
   class {'::pear':}
