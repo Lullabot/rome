@@ -5,9 +5,9 @@ LASTEXIT=1
 while [[ $LASTEXIT -ne 0 ]]
 do
   echo "Starting vagrant provision..."
+  sudo -v
   echo "Waiting 3 seconds before provisioning..."
   sleep 3
-  sudo -v
   vagrant up --no-provision
   sudo -v
   vagrant reload
