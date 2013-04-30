@@ -152,11 +152,12 @@ class rome::apache inherits rome {
       group   => 'root',
   }
 
-  file { '/etc/php5/apache2/php.ini':
+  file { '/etc/php5/apache2/conf.d/custom.ini':
       ensure  => present,
-      source  => '/vagrant/files/apache/etc/php5/apache2/php.ini',
+      source  => '/vagrant/files/apache/etc/php5/apache2/conf.d/custom.ini',
       owner   => 'root',
       group   => 'root',
+      notify  => Service['apache2'],
   }
 
   file { '/etc/crontab':
