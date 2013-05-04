@@ -11,6 +11,7 @@ class Conf
   Facts     = {
     #'nfs_www' => '192.168.100.1:/Users/MYUSERNAME/vagrant/projects/rome/www', # Point this to your www directory for UDP NFS.
     #'apt_proxy' => 'http://192.168.31.42:3142', # Use this URL as an apt proxy.
+    'project' => Project,
   }                         # hash of Factor facts
   SSH_range = (32200..32250)
 end

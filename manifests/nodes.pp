@@ -4,33 +4,33 @@ stage { 'first':
 
 # Edit this class as needed to add additional hosts to your configuration.
 class rome::mvmhosts {
-  host { 'mysql.juno.local' :
+  host { "mysql.${project}.local" :
     ip => '192.168.100.10',
   }
 
-  host { 'memcache.juno.local' :
+  host { "memcache.${project}.local" :
     ip => '192.168.100.20',
   }
-  host { 'solr.juno.local' :
+  host { "solr.${project}.local" :
     ip => '192.168.100.30',
   }
-  host { 'apache.juno.local' :
+  host { "apache.${project}.local" :
     ip => '192.168.100.40',
   }
 }
 
 class rome::onehost {
-  host { 'mysql.juno.local' :
+  host { "mysql.${project}.local" :
     ip => '127.0.0.1',
   }
 
-  host { 'memcache.juno.local' :
+  host { "memcache.${project}.local" :
     ip => '127.0.0.1',
   }
-  host { 'solr.juno.local' :
+  host { "solr.${project}.local" :
     ip => '127.0.0.1',
   }
-  host { 'apache.juno.local' :
+  host { "apache.${project}.local" :
     ip => '127.0.0.1',
   }
 }
@@ -145,11 +145,17 @@ class rome::apache inherits rome {
   }
 
   # Keep track of our customized configuration files.
-  file { '/etc/apache2/sites-available/default':
+  file { "/etc/apache2/sites-available/apache.${project}.local":
       ensure  => present,
       source  => '/vagrant/files/apache/etc/apache2/sites-available/default',
       owner   => 'root',
       group   => 'root',
+  }
+
+  file { "/etc/apache2/sites-enabled/apache.${project}.local":
+      ensure  => 'link',
+      target  => "/etc/apache2/sites-available/apache.${project}.local",
+      notify  => Service['apache2'],
   }
 
   file { '/etc/php5/apache2/conf.d/custom.ini':
@@ -196,7 +202,7 @@ class rome::solr inherits rome {
 
   # Solr, and available indexes
   class { '::solr': }
-  solr::index::drupal { 'apache.juno.local': version => '7.x-1.1' }
+  solr::index::drupal { "apache.${project}.local": version => '7.x-1.1' }
 }
 
 node "onebox" {
