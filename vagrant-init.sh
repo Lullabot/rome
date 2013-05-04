@@ -4,8 +4,9 @@
 LASTEXIT=1
 while [[ $LASTEXIT -ne 0 ]]
 do
-  echo "Starting vagrant provision..."
+  echo "Obtaining sudo permissions to try to skip pauses when configuring NFS exports."
   sudo -v
+  echo "Starting vagrant provision..."
   echo "Waiting 3 seconds before provisioning..."
   sleep 3
   vagrant up --no-provision
