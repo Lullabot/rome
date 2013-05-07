@@ -85,6 +85,17 @@ class rome {
     ensure => present,
   }
 
+  package {'zerofree':
+    ensure => present,
+  }
+
+  file { '/usr/local/bin/remove-old-kernels.sh':
+    path => '/usr/local/bin/remove-old-kernels.sh',
+    source => '/vagrant/files/common/usr/local/bin/remove-old-kernels.sh',
+    owner => 'root',
+    group => 'root',
+  }
+
   file { 'rc.local':
     path => '/etc/rc.local',
     source => '/vagrant/files/common/etc/rc.local',
