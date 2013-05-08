@@ -18,7 +18,7 @@ Vagrant::Config.run do |config|
       # scenarios where we want to ensure that IPs to various boxes are
       # consistent across reboots.
       if defined?(vm::Host_IP)
-        ip = vm::Host_IP
+        ip = "#{Conf::Network}.#{Conf::Subnet}.#{vm::Host_IP}"
       else
         ip = "#{Conf::Network}.#{Conf::Subnet}.#{Conf::Host_IP + ((count_vms) * 10) + index - 1}"
       end
