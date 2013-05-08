@@ -1,6 +1,8 @@
 require "./vm.rb"
 
 # Global configuration for the project goes here.
+# All class constants in Conf will be exposed as Facts to Puppet, with the
+# constant name changed to lowercase.
 class Conf
   Project   = "rome"                     # Rename this to match the name of your project.
   Mvm       = true                       # Set to false to build a single über VM instead.
@@ -8,12 +10,10 @@ class Conf
   Subnet    = "100"                      # Private network address: ###.###.0.0
   Host_IP   = 10                         # Starting host address: 192.168.0.###
   Modules   = {'rome' => 'modules/'}     # hash of puppet module folder names
-  Facts     = {
-    #'nfs_www' => '192.168.100.1:/Users/MYUSERNAME/vagrant/projects/rome/www', # Point this to your www directory for UDP NFS.
-    #'apt_proxy' => 'http://192.168.31.42:3142', # Use this URL as an apt proxy.
-    'project' => Project,
-  }                         # hash of Factor facts
+  #NFS_www   = '192.168.100.1:/Users/MYUSERNAME/vagrant/projects/rome/www' # Point this to your www directory for UDP NFS.
+  #Apt_proxy = 'http://192.168.31.42:3142' # Use this URL as an apt proxy.
   SSH_range = (32200..32250)
+  Facts     = {}                         # Hash of Facts. Add your own or just add class constants.
 end
 
 # VM configuration starts here.

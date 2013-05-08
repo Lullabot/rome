@@ -61,7 +61,13 @@ Vagrant::Config.run do |config|
               puppet.module_path.push("#{full_path}")
             end
           end
-          puppet.facter = Conf::Facts.update(vm::Facts)
+
+          vm_properties = {}
+          Conf.constants.each {|var|
+            vm_properties[var.to_s.downcase] = Conf.const_get(var.to_s)
+          }
+          puppet.facter = Conf::Facts.update(vm_properties)
+
           puppet.options = vm::Options
           if vm::Debug == true
             puppet.options = puppet.options + " --debug"
