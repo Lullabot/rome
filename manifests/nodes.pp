@@ -63,6 +63,8 @@ class apt-proxy {
 class rome {
   include base
 
+  Exec { path => "/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin" }
+
   class { 'apt-proxy':
     stage => first,
   }
@@ -202,6 +204,18 @@ class rome::mysql inherits rome {
       source  => '/vagrant/files/mysql/etc/mysql/conf.d/local.cnf',
       owner   => 'root',
       group   => 'root',
+  }
+
+  # Create MySQL Database & User
+  exec { "mysqladmin create ${project}":
+      command => "mysqladmin CREATE ${project}",
+      unless  => "mysql -e \"SHOW DATABASES LIKE '${project}'\" | grep ${project}",
+  }
+
+  exec { "mysql user ${project}":
+      command => "mysql -e \"GRANT ALL ON \\`${project}\\`.* TO '${project}'@'${network}.${subnet}.%' IDENTIFIED BY '${project}'; FLUSH PRIVILEGES;\"",
+      unless  => "mysql -e \"SHOW GRANTS FOR '${project}'@'${network}.${subnet}.%'\" | grep ${project}",
+      require => Exec["mysqladmin create ${project}"],
   }
 }
 
