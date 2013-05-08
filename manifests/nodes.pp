@@ -5,33 +5,33 @@ stage { 'first':
 # Edit this class as needed to add additional hosts to your configuration.
 class rome::mvmhosts {
   host { "mysql.${project}.local" :
-    ip => '192.168.100.10',
+    ip => $mysql_ip,
   }
 
   host { "memcache.${project}.local" :
-    ip => '192.168.100.20',
+    ip => $memcache_ip,
   }
   host { "solr.${project}.local" :
-    ip => '192.168.100.30',
+    ip => $solr_ip,
   }
   host { "apache.${project}.local" :
-    ip => '192.168.100.40',
+    ip => $apache_ip,
   }
 }
 
 class rome::onehost {
   host { "mysql.${project}.local" :
-    ip => '127.0.0.1',
+    ip => $onebox_ip,
   }
 
   host { "memcache.${project}.local" :
-    ip => '127.0.0.1',
+    ip => $onebox_ip,
   }
   host { "solr.${project}.local" :
-    ip => '127.0.0.1',
+    ip => $onebox_ip,
   }
   host { "apache.${project}.local" :
-    ip => '127.0.0.1',
+    ip => $onebox_ip,
   }
 }
 

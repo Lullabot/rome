@@ -66,6 +66,10 @@ Vagrant::Config.run do |config|
           Conf.constants.each {|var|
             vm_properties[var.to_s.downcase] = Conf.const_get(var.to_s)
           }
+
+          # Add a fact with our IP address.
+          Conf::Facts[vm::Shortname + '_ip'] = ip
+
           puppet.facter = Conf::Facts.update(vm_properties)
 
           puppet.options = vm::Options
