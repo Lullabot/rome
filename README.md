@@ -49,3 +49,8 @@ Vagrant does not currently support mounting NFS shares with UDP. UDP is *much* f
 
 By default, a "www" folder within the Rome directory is mounted with NFS, over TCP, to `/mnt/www`. Edit manifests/node.pp, and edit the Puppet configuration to match your local system and mount it again in `/var/www`. This is probably an area for future improvement.
 
+Credits
+=======
+
+Many ideas for this project came from [Drush Vagrant](https://drupal.org/project/drush-vagrant). Thanks to [ergonlogic](https://drupal.org/user/368613) for discussing ideas for how to approach Vagrant configuration and sharing his work with the Drupal community.
+
