@@ -1,5 +1,5 @@
-Rome: A Multi-VM Vagrant Environment for LAMP developent
-========================================================
+Rome: Vagrant Multi-VMs for LAMP development
+============================================
 
 Rome is a set of Vagrant and Puppet configurations used to create and manage a development environment where each service is hosted on a separate machine. This allows developers to accurately test productions scenarios where each environment is separated by a network of some kind.
 
