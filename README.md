@@ -25,7 +25,6 @@ It is recommended to use Rome as a full git clone with a local branch keeping tr
     vim manifests/nodes.pp
     git commit -m 'A useful commit message.'
     ./vagrant-init.sh
-    vagrant vbguest # If you have https://github.com/dotless-de/vagrant-vbguest installed.
     vim /etc/hosts # Add the IP of the Apache server.
 
 Most VM configuration is handled through config.rb. Within this file, define each VM as a subclass of Vm. Each Shortname property is used to tell Vagrant what Puppet configs to apply to the machine.
@@ -47,7 +46,14 @@ NFS mounts
 
 Vagrant does not currently support mounting NFS shares with UDP. UDP is *much* faster than TCP for loading directory structures and many small files. For example, UDP mounting cut a Drupal site installation time in half. Since Vagrant doesn't support UDP mounting, we manage shared folders with Puppet. However, it's still nice to use Vagrant's automatic management of <code>/etc/exports</code>. Our workaround is to still share our folders, but to mount them in the VMs in alternate directories.
 
-By default, a "www" folder within the Rome directory is mounted with NFS, over TCP, to `/mnt/www`. Edit manifests/node.pp, and edit the Puppet configuration to match your local system and mount it again in `/var/www`. This is probably an area for future improvement.
+To enable this feature, uncomment ```NFS_www``` in ```config.rb```, and update the path to point to your document root.
+
+APT Package Cache
+=================
+
+Rome supports pointing APT to an apt-cache server, significantly speeding up initial provisioning of a VM provided that packages are already downloaded. This is especially noticable in the multi-VM configuration. For a pre-built Vagrant VM suitable to use as a caching server, see [puppet-apt-cacher-ng](https://github.com/lelutin/puppet-apt-cacher-ng).
+
+To enable this feature, uncomment ```Apt_cache``` in ```config.rb```.
 
 Credits
 =======
