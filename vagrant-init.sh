@@ -14,7 +14,6 @@ do
   vagrant reload
   sudo -v
   vagrant provision
-  sudo -v
   LASTEXIT=$?
 done
 
