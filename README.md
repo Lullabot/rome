@@ -39,7 +39,12 @@ These VMs use Puppet to manage configuration. Puppet is an "eventually consisten
 VM IPs
 ======
 
-Rather than include a system to dynamically manage hostnames and IP addresses, Rome uses static IPs defined in the configuration files for each VM. By default, VMs are assigned IPs in the 192.168.100.0/255.255.255.0 subnet. Each VM uses a copy of files/common/etc/hosts to reference other machines.
+Rather than include a system to dynamically manage hostnames and IP addresses, Rome uses static IPs defined in the configuration files for each VM. By default, VMs are assigned IPs in the 192.168.100.0/255.255.255.0 subnet. If you are using multiple projects based on Rome, it's recommended to change the ```Subnet``` constant in ```config.rb```. Otherwise, SSH will throw host verification errors whenever you switch projects, and it's not possible to run multiple projects at once.
+
+MySQL Databases
+===============
+
+By default, a MySQL database and user is created with the database name, user name, and password matching the the name of your project. Out of the box, this will give you a "rome" database. Access is granted to all IPs on the network subnet of your VMs. If this is not secure enough, consider changing the SQL grants after initial provisioning.
 
 NFS mounts
 ==========
@@ -54,6 +59,15 @@ APT Package Cache
 Rome supports pointing APT to an apt-cache server, significantly speeding up initial provisioning of a VM provided that packages are already downloaded. This is especially noticable in the multi-VM configuration. For a pre-built Vagrant VM suitable to use as a caching server, see [puppet-apt-cacher-ng](https://github.com/lelutin/puppet-apt-cacher-ng).
 
 To enable this feature, uncomment ```Apt_cache``` in ```config.rb```.
+
+Custom file configurations
+==========================
+
+Files in the ```files``` directory can be customized as needed, and they will be updated on the appropriate VMs when running ```vagrant provision```. Each subdirectory represents a VM type. In the single VM configuration, all files will be deployed. In particular, the following files will probably need to be customized:
+
+ * ```files/apache/etc/php5/apache2/conf.d/custom.ini```
+ * ```files/mysql/etc/mysql/conf.d/local.cnf```
+ * ```files/apache/etc/crontab```
 
 Credits
 =======
