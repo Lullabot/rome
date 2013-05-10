@@ -19,9 +19,9 @@ Configuration
 
 It is recommended to use Rome as a full git clone with a local branch keeping track of changes.
 
-    git clone <url>
+    git clone <url> <my-project-name>
     git checkout -b local
-    vim config.rb
+    vim config.rb # You will want to change Project and check the rest of the configuration.
     vim manifests/nodes.pp
     git commit -m 'A useful commit message.'
     ./vagrant-init.sh
