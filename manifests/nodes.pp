@@ -228,6 +228,14 @@ class rome::solr inherits rome {
   # Solr, and available indexes
   class { '::solr': }
   solr::index::drupal { "apache.${project}.local": version => '7.x-1.1' }
+
+  # Automatically copy in our Solr configuration if it's been downloaded.
+  exec { "copy solr configuration":
+    command => "cp /var/lib/tomcat6/solr/apache.${project}.local/conf/solr-1.4/* /var/lib/tomcat6/solr/apache.${project}.local/conf",
+    unless  => "grep drupal-3.0-0-solr1.4 /var/lib/tomcat6/solr/apache.${project}.local/conf/schema.xml",
+    onlyif  => "test -f /var/lib/tomcat6/solr/apache.${project}.local/conf/solr-1.4/schema.xml",
+    notify  => Service['tomcat6'],
+  }
 }
 
 node "onebox" {
