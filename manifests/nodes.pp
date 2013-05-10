@@ -75,6 +75,14 @@ class rome {
     stage   => 'first',
   }
 
+  package {'pbzip2':
+    ensure => present,
+  }
+
+  package {'pigz':
+    ensure => present,
+  }
+
   package {'htop':
     ensure => present,
   }
