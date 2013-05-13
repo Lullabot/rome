@@ -87,7 +87,7 @@ class rome {
     ensure => present,
   }
 
-  if $unattended_upgrades {
+  if str2bool($unattended_upgrades) {
     package {'unattended-upgrades':
       ensure => present,
     }
