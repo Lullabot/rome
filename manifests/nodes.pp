@@ -87,8 +87,24 @@ class rome {
     ensure => present,
   }
 
-  package {'unattended-upgrades':
-    ensure => present,
+  if $unattended_upgrades {
+    package {'unattended-upgrades':
+      ensure => present,
+    }
+
+    file { 'rc.local':
+      path => '/etc/rc.local',
+      source => '/vagrant/files/common/etc/rc.local',
+      owner => 'root',
+      group => 'root',
+    }
+
+    file { '/usr/local/bin/remove-old-kernels.sh':
+      path => '/usr/local/bin/remove-old-kernels.sh',
+      source => '/vagrant/files/common/usr/local/bin/remove-old-kernels.sh',
+      owner => 'root',
+      group => 'root',
+    }
   }
 
   package {'vim':
@@ -99,19 +115,6 @@ class rome {
     ensure => present,
   }
 
-  file { '/usr/local/bin/remove-old-kernels.sh':
-    path => '/usr/local/bin/remove-old-kernels.sh',
-    source => '/vagrant/files/common/usr/local/bin/remove-old-kernels.sh',
-    owner => 'root',
-    group => 'root',
-  }
-
-  file { 'rc.local':
-    path => '/etc/rc.local',
-    source => '/vagrant/files/common/etc/rc.local',
-    owner => 'root',
-    group => 'root',
-  }
 }
 
 class rome::apache inherits rome {

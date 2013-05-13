@@ -10,6 +10,7 @@ class Conf
   Subnet    = "100"                      # Private network address: ###.###.0.0
   Host_IP   = 10                         # Starting host address: 192.168.0.###
   Modules   = {'rome' => 'modules/'}     # hash of puppet module folder names
+  Unattended_upgrades = false            # Automatically upgrade VM packages. It's recommended to have vagrant-vbguest installed.
   #NFS_www   = '192.168.100.1:/Users/MYUSERNAME/vagrant/projects/rome/www' # Point this to your www directory for UDP NFS.
   #Apt_proxy = 'http://192.168.31.42:3142' # Use this URL as an apt proxy.
   SSH_range = (32200..32250)
