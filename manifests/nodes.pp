@@ -125,7 +125,7 @@ class rome::apache inherits rome {
       device => $nfs_www,
       fstype => "nfs",
       ensure => "mounted",
-      options => "udp",
+      options => "udp,noauto",
       atboot => "false",
     }
   }
