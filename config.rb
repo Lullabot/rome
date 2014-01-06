@@ -11,7 +11,6 @@ class Conf
   Host_IP   = 10                         # Starting host address: 192.168.0.###
   Modules   = {'rome' => 'modules/'}     # hash of puppet module folder names
   Unattended_upgrades = false            # Automatically upgrade VM packages. It's recommended to have vagrant-vbguest installed.
-  #NFS_www   = '192.168.100.1:/Users/MYUSERNAME/vagrant/projects/rome/www' # Point this to your www directory for UDP NFS.
   #Apt_proxy = 'http://192.168.31.42:3142' # Use this URL as an apt proxy.
   SSH_range = (32200..32250)
   Facts     = {}                         # Hash of Facts. Add your own or just add class constants.
@@ -25,7 +24,7 @@ class OneBox < Vm
   Host_IP    = "10"
   Memory     = "2048"
   Cpus       = 4
-  NFS_shares = {"www" => "/mnt/www"}
+  NFS_shares = {"www" => "/var/www"}
 end
 
 class MySQL < Vm

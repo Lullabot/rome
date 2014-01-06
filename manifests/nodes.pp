@@ -120,16 +120,6 @@ class rome {
 class rome::apache inherits rome {
   include rome
 
-  if $nfs_www {
-    mount { "/var/www":
-      device => $nfs_www,
-      fstype => "nfs",
-      ensure => "mounted",
-      options => "udp,noauto",
-      atboot => "false",
-    }
-  }
-
   class {'::php':}
   class {'::pear':}
   class {'::mysql::client':}
